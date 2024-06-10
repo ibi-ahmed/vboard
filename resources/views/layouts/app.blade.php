@@ -1,39 +1,24 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+<!doctype html>
+<html lang="en">
+@include('layouts.header')
+<body>
+@include('layouts.navigation')
+@include('layouts.sidebar')
+<!-- ========== MAIN CONTENT ========== -->
+<main id="content" class="lg:ps-[260px] pt-[59px] ">
+    <div class="p-2 sm:p-5 sm:py-0 md:pt-5 space-y-5">
+        <!-- Card -->
+        <div class="p-4 flex flex-col justify-center h-72 md:h-96 min-h-[calc(100vh-115px)] sm:min-h-[calc(100vh-143px)]  bg-white border border-gray-200 shadow-sm rounded-xl">
+            <div class="relative h-full border border-dashed border-gray-200 rounded-xl overflow-hidden">
+                    @yield('content')
+            </div>
         </div>
-    </body>
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- Preline script -->
-{{--    <script src="./node_modules/preline/dist/preline.js"></script>--}}
+        <!-- End Card -->
+    </div>
+</main>
+<x-search />
+<!-- ========== END MAIN CONTENT ========== -->
+@include('layouts.footer')
+</body>
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 </html>
